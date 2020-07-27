@@ -4,9 +4,7 @@
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>
 <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 
-<div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
-		
-	</div>
+
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -14,22 +12,33 @@
 
     <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">   
 
-    <a-marker preset="hiro.patt">
-    <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay controls muted src="https://cdn.glitch.com/18065b30-c144-458a-83de-5365d2fb2a4f%2F1.mp4?v=1595880801646"></video>
+    <a-marker preset="hiro">
+    <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay controls muted src="https://cdn.glitch.com/18065b30-c144-458a-83de-5365d2fb2a4f%2Fmivideo.mp4?v=1595886119696"></video>
     <a-video src="#mivideo" position="0 0 0" rotation="270 0 0" ></a-video>
    
    <script> 
-     
+      var m = document.querySelector("a-marker")
+      m.addEventListener("markerFound", (e)=>{
+      console.log("found")
+      var v = document.querySelector('#mivideo').play();
+})
+      m.addEventListener("markerLost", (e)=>{
+      console.log("lost")
+      var v = document.querySelector('#mivideo').pause();
+  
+})
 
 
-
+document.querySelector("button").addEventListener("click", (e)=>{
+	console.log("Activar Sonido")
+  var v = document.querySelector('#mivideo').muted=false;
+})
      </script>
      
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
 </body>
-
 
 
 
